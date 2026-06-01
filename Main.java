@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Validaciones v = new Validaciones();
+        validaciones v = new validaciones();
 
         LinkedList<EstudianteIngenieria> listaIng = new LinkedList<>();
         Stack<EstudianteIngenieria>      pilaIng  = new Stack<>();

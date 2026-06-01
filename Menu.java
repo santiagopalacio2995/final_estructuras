@@ -7,7 +7,7 @@ public class Menu {
 
     public static void menuIngenieria(Scanner sc,LinkedList<EstudianteIngenieria> lista,Stack<EstudianteIngenieria> pila,Queue<EstudianteIngenieria> cola) {
         GestionIngenieria g = new GestionIngenieria();
-        Validaciones      v = new Validaciones();
+        validaciones      v = new validaciones();
         boolean bandera = true;
         while (bandera) {
             System.out.println("\n ----- GESTION PRESTAMOS - INGENIERIA -----");
@@ -41,7 +41,7 @@ public class Menu {
                                   Stack<EstudianteDiseno> pila,
                                   Queue<EstudianteDiseno> cola) {
         GestionDiseno g = new GestionDiseno();
-        Validaciones  v = new Validaciones();
+        validaciones  v = new validaciones();
         boolean bandera = true;
         while (bandera) {
             System.out.println("\n ---- GESTION PRESTAMOS - DISENO ----");

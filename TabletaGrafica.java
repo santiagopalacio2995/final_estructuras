@@ -19,7 +19,7 @@ public class TabletaGrafica extends Equipo {
     public void setPeso(double p)           { this.peso = p; }
 
     public static String elegirAlmacenamiento(Scanner sc) {
-        Validaciones v = new Validaciones();
+        validaciones v = new validaciones();
         System.out.println("Seleccione el almacenamiento:");
         System.out.println("  1. 256 GB");
         System.out.println("  2. 512 GB");

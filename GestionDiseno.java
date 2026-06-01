@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class GestionDiseno {
 
-    private final Validaciones v = new Validaciones();
+    private final validaciones v = new validaciones();
 
     public void registrarPrestamo(LinkedList<EstudianteDiseno> lista,Stack<EstudianteDiseno> pila,Queue<EstudianteDiseno> cola,Scanner sc) {
         System.out.print("Cedula: ");
