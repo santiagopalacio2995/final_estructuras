@@ -7,7 +7,8 @@ public class ComputadorPortatil extends Equipo {
 
     public ComputadorPortatil() {}
 
-    public ComputadorPortatil(String serial, String marca, double tamanio,double precio, String sistemaOperativo, String procesador) {
+    public ComputadorPortatil(String serial, String marca, float tamanio,
+                              float precio, String sistemaOperativo, String procesador) {
         super(serial, marca, tamanio, precio);
         this.sistemaOperativo = sistemaOperativo;
         this.procesador       = procesador;
@@ -19,7 +20,7 @@ public class ComputadorPortatil extends Equipo {
     public void setProcesador(String p)        { this.procesador = p; }
 
     public static String elegirSistemaOperativo(Scanner sc) {
-        Validaciones v = new Validaciones();
+        validaciones v = new validaciones();
         System.out.println("Seleccione el Sistema Operativo:");
         System.out.println("  1. Windows 7");
         System.out.println("  2. Windows 10");
@@ -33,7 +34,7 @@ public class ComputadorPortatil extends Equipo {
     }
 
     public static String elegirProcesador(Scanner sc) {
-        Validaciones v = new Validaciones();
+        validaciones v = new validaciones();
         System.out.println("Seleccione el Procesador:");
         System.out.println("  1. AMD Ryzen");
         System.out.println("  2. Intel Core i5");
