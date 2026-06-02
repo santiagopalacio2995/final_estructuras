@@ -2,12 +2,12 @@ public abstract class Equipo {
 
     private String serial;
     private String marca;
-    private double tamanio;
-    private double precio;
+    private float  tamanio;
+    private float  precio;
 
     public Equipo() {}
 
-    public Equipo(String serial, String marca, double tamanio, double precio) {
+    public Equipo(String serial, String marca, float tamanio, float precio) {
         this.serial  = serial;
         this.marca   = marca;
         this.tamanio = tamanio;
@@ -16,14 +16,13 @@ public abstract class Equipo {
 
     public String getSerial()  { return serial; }
     public String getMarca()   { return marca; }
-    public double getTamanio() { return tamanio; }
-    public double getPrecio()  { return precio; }
+    public float  getTamanio() { return tamanio; }
+    public float  getPrecio()  { return precio; }
 
     public void setSerial(String serial)  { this.serial = serial; }
     public void setMarca(String marca)    { this.marca = marca; }
-    public void setTamanio(double t)      { this.tamanio = t; }
-    public void setPrecio(double p)       { this.precio = p; }
+    public void setTamanio(float t)       { this.tamanio = t; }
+    public void setPrecio(float p)        { this.precio = p; }
 
     public abstract void mostrarDatos();
 }
-

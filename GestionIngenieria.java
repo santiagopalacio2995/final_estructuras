@@ -7,13 +7,24 @@ public class GestionIngenieria {
 
     private final validaciones v = new validaciones();
 
-    public void registrarPrestamo(LinkedList<EstudianteIngenieria> lista,Stack<EstudianteIngenieria> pila,Queue<EstudianteIngenieria> cola,Scanner sc) {
+    private boolean serialPrestado(LinkedList<EstudianteIngenieria> lista, String serial) {
+        for (EstudianteIngenieria e : lista)
+            if (e.getSerialEquipo().equalsIgnoreCase(serial)) return true;
+        return false;
+    }
+
+    public void registrarPrestamo(LinkedList<EstudianteIngenieria> lista,
+                                  Stack<EstudianteIngenieria> pila,
+                                  Queue<EstudianteIngenieria> cola,
+                                  LinkedList<ComputadorPortatil> computadores,
+                                  LinkedList<TabletaGrafica> tabletas,
+                                  Scanner sc) {
         System.out.print("Cedula: ");
         String cedula = v.validarCedula(sc);
 
         for (EstudianteIngenieria e : lista) {
-            if (e.getCedula().equals(cedula) && e.getSerialEquipo() != null && !e.getSerialEquipo().isEmpty()) {
-                System.out.println("Error: el estudiante ya tiene un equipo asignado. Debe devolver primero.");
+            if (e.getCedula().equals(cedula)) {
+                System.out.println("Error: el estudiante ya tiene un prestamo activo. Debe devolver primero.");
                 return;
             }
         }
@@ -33,16 +44,27 @@ public class GestionIngenieria {
         System.out.print("Semestre (1-10): ");
         o.setSemestre(v.validarRango(1, 10, sc));
 
-        System.out.print("Promedio acumulado: ");
-        o.setPromedio(v.validarDecimal(sc));
+        System.out.print("Promedio (0.0 - 5.0): ");
+        o.setPromedio(v.validarPromedio(sc));
 
-        System.out.print("Serial del equipo: ");
-        o.setSerialEquipo(sc.nextLine().trim());
+        System.out.print("Serial del equipo a prestar: ");
+        String serial = sc.nextLine().trim();
 
+        GestionEquipos ge = new GestionEquipos();
+        if (!ge.serialDisponible(computadores, tabletas, serial)) {
+            System.out.println("Error: el serial '" + serial + "' no existe en el inventario de equipos.");
+            System.out.println("Registre primero el equipo en el menu de Equipos.");
+            return;
+        }
+        if (serialPrestado(lista, serial)) {
+            System.out.println("Error: el equipo con serial '" + serial + "' ya esta prestado.");
+            return;
+        }
+
+        o.setSerialEquipo(serial);
         lista.add(o);
         pila.push(o);
         cola.offer(o);
-
         System.out.println("Prestamo registrado correctamente.");
     }
 
@@ -61,8 +83,8 @@ public class GestionIngenieria {
                 o.setTelefono(v.validarTelefono(sc));
                 System.out.print("Nuevo semestre (1-10): ");
                 o.setSemestre(v.validarRango(1, 10, sc));
-                System.out.print("Nuevo promedio: ");
-                o.setPromedio(v.validarDecimal(sc));
+                System.out.print("Nuevo promedio (0.0 - 5.0): ");
+                o.setPromedio(v.validarPromedio(sc));
                 System.out.println("Registro actualizado.");
             }
         }
@@ -101,19 +123,19 @@ public class GestionIngenieria {
 
     public void mostrarLista(LinkedList<EstudianteIngenieria> lista) {
         if (lista.isEmpty()) { System.out.println("La lista esta vacia."); return; }
-        System.out.println("=== LISTA - Ingenieria (" + lista.size() + " registros) ===");
+        System.out.println(" --- LISTA - Ingenieria (" + lista.size() + " registros) --- ");
         for (EstudianteIngenieria o : lista) o.mostrarDatos();
     }
 
     public void mostrarPila(Stack<EstudianteIngenieria> pila) {
         if (pila.isEmpty()) { System.out.println("La pila esta vacia."); return; }
-        System.out.println("=== HISTORIAL PILA - Ingenieria ===");
+        System.out.println(" --- HISTORIAL PILA - Ingenieria --- ");
         for (int i = pila.size() - 1; i >= 0; i--) pila.get(i).mostrarDatos();
     }
 
     public void mostrarCola(Queue<EstudianteIngenieria> cola) {
         if (cola.isEmpty()) { System.out.println("La cola esta vacia."); return; }
-        System.out.println("=== COLA DE ATENCION - Ingenieria ===");
+        System.out.println(" --- COLA DE ATENCION - Ingenieria --- ");
         for (EstudianteIngenieria o : cola) o.mostrarDatos();
     }
 }

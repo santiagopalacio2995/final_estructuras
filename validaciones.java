@@ -14,14 +14,20 @@ public class validaciones {
     }
 
     public double validarDecimal(Scanner sc) {
-        if (sc.hasNextDouble()) {
-            double valor = sc.nextDouble();
-            sc.nextLine();
-            return valor;
+        String entrada = sc.nextLine().trim().replace(",", ".");
+        try {
+            return Double.parseDouble(entrada);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: ingrese un numero decimal valido (ej: 4.5).");
+            return validarDecimal(sc);
         }
-        System.out.println("Error: ingrese un numero decimal valido (ej: 4.5).");
-        sc.nextLine();
-        return validarDecimal(sc);
+    }
+
+    public double validarPromedio(Scanner sc) {
+        double valor = validarDecimal(sc);
+        if (valor >= 0.0 && valor <= 5.0) return valor;
+        System.out.println("Error: el promedio debe estar entre 0.0 y 5.0.");
+        return validarPromedio(sc);
     }
 
     public int validarRango(int min, int max, Scanner sc) {
@@ -64,5 +70,15 @@ public class validaciones {
         if (texto.matches("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+")) return texto;
         System.out.println("Error: el campo '" + campo + "' no permite caracteres especiales.");
         return validarTexto(campo, sc);
+    }
+
+    public float validarFloat(Scanner sc) {
+        String entrada = sc.nextLine().trim().replace(",", ".");
+        try {
+            return Float.parseFloat(entrada);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: ingrese un numero valido (ej: 15.6).");
+            return validarFloat(sc);
+        }
     }
 }

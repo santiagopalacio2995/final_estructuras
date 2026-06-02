@@ -7,7 +7,8 @@ public class ComputadorPortatil extends Equipo {
 
     public ComputadorPortatil() {}
 
-    public ComputadorPortatil(String serial, String marca, double tamanio,double precio, String sistemaOperativo, String procesador) {
+    public ComputadorPortatil(String serial, String marca, float tamanio,
+                              float precio, String sistemaOperativo, String procesador) {
         super(serial, marca, tamanio, precio);
         this.sistemaOperativo = sistemaOperativo;
         this.procesador       = procesador;
